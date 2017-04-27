@@ -1,0 +1,12 @@
+Player 1 is: <%= @game.player_1.name %><br/>
+Player 1 Hit Points: <%= @game.player_1.hit_points%><br/>
+Player 2 is: <%= @game.player_2.name %><br/>
+Player 2 Hit Points: <%= @game.player_2.hit_points%><br/>
+<br/>
+
+It is <%= @game.current_turn.name %>'s turn
+
+
+<form action='/attack'>
+<br/><input type="submit" value='Attack'>
+</form>

@@ -1,0 +1,6 @@
+Game Over!<br/>
+<% if @game.current_turn == @game.player_1 %>
+<%= @game.player_1.name %> has been KO'ed
+<% else %>
+<%= @game.player_2.name %> has been KO'ed
+<% end %>
