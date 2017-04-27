@@ -18,30 +18,37 @@ class Battle < Sinatra::Base
 
   post '/names' do
     $game = Game.new(Player.new(params[:player_1_name]), Player.new(params[:player_2_name]))
-    # $player_1 = Player.new(params[:player_1_name])
-    # $player_2 = Player.new(params[:player_1_name])
-    # session['player_1_name'] = params['player_1_name']
-    # session['player_2_name'] = params['player_2_name']
-    redirect '/play'
+    redirect '/player_1_turn'
   end
 
-  get '/play' do
+  get '/player_1_turn' do
     @player_1_name = $game.player_1.name
     @player_2_name = $game.player_2.name
-    # @player_1_name = session['player_1_name']
-    # @player_2_name = session['player_2_name']
     @player_1_hitpoints = $game.player_1.hitpoints
     @player_2_hitpoints = $game.player_2.hitpoints
-    erb :play
+    erb :player1turn
   end
 
-  get '/attack' do
+  get '/player_2_turn' do
     @player_1_name = $game.player_1.name
     @player_2_name = $game.player_2.name
-    $game.attack($game.player_2)
-    # @player_1_name = session['player_1_name']
-    # @player_2_name = session['player_2_name']
-    erb :attack
+    @player_1_hitpoints = $game.player_1.hitpoints
+    @player_2_hitpoints = $game.player_2.hitpoints
+    erb :player2turn
+  end
+
+  get '/attackplayer1' do
+    @player_1_name = $game.player_1.name
+    @player_2_name = $game.player_2.name
+    $game.attack
+    erb :attackplayer1
+  end
+
+  get '/attackplayer2' do
+    @player_1_name = $game.player_1.name
+    @player_2_name = $game.player_2.name
+    $game.attack
+    erb :attackplayer2
   end
 
   run! if app_file == $0
